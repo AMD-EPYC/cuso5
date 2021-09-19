@@ -102,17 +102,18 @@
         <div id="title">与佛论禅(仿制版v0.1)</div>
         <div id="main">
             <textarea placeholder="听，咸鱼的声音..." id="decode" v-model="decode"></textarea>
-            <input type="button" value="参悟咸鱼的真谛" @click="encrypt">
-            <input type="button" value="获得爆肝的勇气" @click="decrypt">
+            <input type="button" value="获得爆肝的勇气↓" @click="encrypt">
+            <input type="button" value="参悟咸鱼的真谛↑" @click="decrypt">
             <input type="button" id="help" value="人生归途" @click="showHelp">
             <textarea placeholder="镜海迷梦" id="encode" v-model="encode"></textarea>
+            <input type="button" value="点击复制" @click="copy">
         </div>
         <div id="author">
             <div>一条失去灵魂的咸鱼仿制，表示大概不会有人用的</div>
             <div>主站开发中。。。。ㅤ※ㅤ
                 <a href="https:\\xcoa.tk" target="_blank">新铜矿厂</a>
             </div>
-            <div id="hidden" @click="showEgg()">
+            <div id="hidden" onselectstart="return false">
                 <div>匿名反对某站制作闭源新佛曰的垄断行为</div>
                 <div>另外，没有佛曰是因为没肝完。。。目前是base64</div>
                 <div>为什么没看到class只有id？因为getElementById不用遍历</div>
@@ -132,7 +133,7 @@
             //原文
             decode: "",
             //密文
-            encode: ""
+            encode: "",
         },
         methods: {
             encrypt() {
@@ -144,12 +145,24 @@
                 this.decode = utf8to16(base64decode(this.encode));
             },
             showHelp() {
-                document.getElementById("window").style.display = "none"
-                document.getElementById("end").style.display = "block"
+                document.getElementById("window").style.display = "none";
+                document.getElementById("end").style.display = "block";
             },
-/*             showEgg(event) {
-                document.getElementById("hidden").style.color = "#bfa"
-            } */
+            copy() {
+                
+            }
+        },
+        created() {
+            document.addEventListener("click", e => {
+                var box = document.getElementById("hidden");
+                if (box.contains(e.target)) {
+                    if (box.style.color == "rgb(0, 0, 0)") {
+                        box.style.color = "#fff"
+                    } else {
+                        box.style.color = "#000";
+                    }
+                }
+            })
         },
     })
 </script>
